@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Tracker Visualizer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">PROJECT TRACKER VISUALIZER</p>
+      <h1>Program Update Console</h1>
+      <p class="subline">Pixel-retro dashboard inspired by ICICI Securities color palette.</p>
+    </div>
+    <div class="controls card">
+      <label for="ownerSelect">OWNER FILTER</label>
+      <select id="ownerSelect" multiple size="5" aria-label="Select one or more owners"></select>
+      <small>Tip: Ctrl/Cmd + click for multi-select.</small>
+      <label for="viewSelect">VIEW</label>
+      <select id="viewSelect">
+        <option value="all">All Panels</option>
+        <option value="gantt">Gantt Chart</option>
+        <option value="status">Status + Commentary</option>
+      </select>
+      <label for="dataFile">IMPORT CSV (OPTIONAL)</label>
+      <input id="dataFile" type="file" accept=".csv" />
+    </div>
+  </header>
+
+  <main>
+    <section id="ganttSection" class="panel card">
+      <div class="panel-head">
+        <h2>1) OWNER-BASED GANTT CHART</h2>
+        <p>Owner → Cluster hierarchy. Hover or click any cluster bar to see cluster label + first 3 dimension scores.</p>
+      </div>
+      <div id="ganttLegend" class="legend"></div>
+      <div id="ganttChart" class="gantt"></div>
+      <div id="ganttTooltip" class="tooltip hidden" role="status" aria-live="polite"></div>
+    </section>
+
+    <section id="statusSection" class="panel card">
+      <div class="panel-head">
+        <h2>2) STATUS + COMMENTARY BOARD</h2>
+        <p>Owner filter applies to summary cards and commentary tables.</p>
+      </div>
+
+      <div id="statusCards" class="status-grid"></div>
+
+      <div class="tables-grid">
+        <article class="table-card">
+          <h3>DELAYED THIS WEEK</h3>
+          <table id="delayTable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Activity</th>
+                <th>Owner</th>
+                <th>Original Timeline</th>
+                <th>Revised Timeline</th>
+                <th>Remarks</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </article>
+
+        <article class="table-card">
+          <h3>PENDING / PLANNED AHEAD</h3>
+          <table id="pendingTable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Activity</th>
+                <th>Owner</th>
+                <th>Date for Timeline</th>
+                <th>Remarks</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <template id="emptyRowTemplate">
+    <tr>
+      <td colspan="6" class="empty">No matching records for selected owner.</td>
+    </tr>
+  </template>
+
+  <script src="sample-data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
